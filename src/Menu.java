@@ -1,6 +1,4 @@
-import com.sun.xml.internal.bind.v2.model.core.ID;
 
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -14,6 +12,7 @@ public class Menu {
     City_History NuCityHist = new City_History();
 
 
+// les methodes pour swticher:
     public void OptionsManagemenet() throws SQLException {
 
         int choix;
@@ -25,7 +24,6 @@ public class Menu {
             System.out.println("3. Sortie");
             System.out.println("_____________________________");
             System.out.print("Entrer votre choix : ");
-            System.out.println("entrer un choix :");
             choix = new Scanner(System.in).nextInt();
             switch (choix) {
                 case 1:
@@ -41,7 +39,6 @@ public class Menu {
                     System.out.println("Choix invalide. Veuillez réessayer.");
             }
         } while (choix != 3);
-
     }
 
 
@@ -49,23 +46,22 @@ public class Menu {
 
 
     public void villeOptions() throws SQLException {
-        int choice, cityId;
+        int choix, cityId;
         String cityName;
         int currentTemperature, currentHumidity, currentWindSpeed;
         do {
             System.out.println("\t\t\t||======================================================================||");
-            System.out.println("\t\t\t||------------|              villes Management            |-----------||");
+            System.out.println("\t\t\t||------------|              villes Management              |-----------||");
             System.out.println("\t\t\t||======================================================================||");
-            System.out.println("\t\t\t||------------|   1: Ajouter ville                             |-----------||");
-            System.out.println("\t\t\t||------------|   2: supprimer ville                            |-----------||");
-            System.out.println("\t\t\t||------------|   3: Modifier ville                          |-----------||");
-            System.out.println("\t\t\t||------------|   4: Afficher le tableau des villes                  |-----------||");
-            System.out.println("\t\t\t||------------|   5: Retour                                     |-----------||");
-            System.out.println("\t\t\t||------------|   6: Quitter application                    |-----------||");
+            System.out.println("\t\t\t||------------|   1: Ajouter une ville                      |-----------||");
+            System.out.println("\t\t\t||------------|   2: supprimer une ville                    |-----------||");
+            System.out.println("\t\t\t||------------|   3: Modifier une ville                     |-----------||");
+            System.out.println("\t\t\t||------------|   4: Afficher le tableau des villes         |-----------||");
+            System.out.println("\t\t\t||------------|   5: Retour                                 |-----------||");
             System.out.println("\t\t\t||======================================================================||");
             System.out.println("Enter votre choix: ");
-            choice = new Scanner(System.in).nextInt();
-            switch (choice) {
+            choix = new Scanner(System.in).nextInt();
+            switch (choix) {
                 case 1:
                     System.out.print("ID : ");
                     NuCityCara.setCityId(new Scanner(System.in).nextInt());
@@ -85,15 +81,15 @@ public class Menu {
                     City.AjouterCity(NuCityCara);
                     break;
                 case 2:
-                    System.out.print("Enter student ID to delete: ");
+                    System.out.print("Enter city ID to delete: ");
                     cityId = new Scanner(System.in).nextInt();
                     City.SupprimerCity(cityId);
                     break;
                 case 3:
-                    System.out.print("Enter ville ID to update: ");
+                    System.out.print("Enter city ID to update: ");
                     cityId = new Scanner(System.in).nextInt();
 
-                    System.out.print("new nom de ville : ");
+                    System.out.print("new name of city: ");
                     cityName = new Scanner(System.in).nextLine();
 
                     System.out.print(" new temperature : ");
@@ -107,50 +103,46 @@ public class Menu {
                     City.ModifierCity(new City(cityId, cityName, currentTemperature, currentHumidity, currentWindSpeed));
                     break;
 
-//                case 4:
-////                    System.out.println("All  villes :");
-////                    for (Student std : City.getAllStudents()) {
-////                        System.out.println(std);
-////                    }
-//                    break;
+                case 4:
+                    System.out.println("All  cities :");
+                    for (City std : City.getAllCities()) {
+                        System.out.println(std);
+                    }
+                    break;
                 case 5:
                     OptionsManagemenet();
-                case 6:
-                    System.out.println(" merci pour l'utilisation de notre app !!!");
                     break;
                 default:
                     System.out.println("choix invalide veillez ressayer !!");
             }
-        } while (choice != 6);
+        } while (choix != 5);
     }
 
 
     public void VilleHistoryOptions() throws SQLException {
-        System.out.println("\t\t\t||======================================================================||");
-        System.out.println("\t\t\t||------------|              ville History Management            |-----------||");
-        System.out.println("\t\t\t||======================================================================||");
-        System.out.println("\t\t\t||------------|   1: Ajouter ville  hidtory                            |-----------||");
-        System.out.println("\t\t\t||------------|   2: Afficher ville   hidtory                         |-----------||");
-        System.out.println("\t\t\t||------------|   3: Modifier ville   hidtory                       |-----------||");
-        System.out.println("\t\t\t||------------|   4: supprimer le tableau des villes      hidtory            |-----------||");
-        System.out.println("\t\t\t||------------|   5: recherche          ville history                            |-----------||");
-        System.out.println("\t\t\t||------------|   6: Retour                                     |-----------||");
-        System.out.println("\t\t\t||------------|   7: Quitter application                    |-----------||");
-
-
-        System.out.println("Entrer votre choix:");
-        int choix = new Scanner(System.in).nextInt();
+        int choix;
         do {
-
+        System.out.println("\t\t\t||======================================================================||");
+        System.out.println("\t\t\t||------------|           ville History Management          |-----------||");
+        System.out.println("\t\t\t||======================================================================||");
+        System.out.println("\t\t\t||------------|   1: Ajouter l'historique d'une ville       |-----------||");
+        System.out.println("\t\t\t||------------|   2: Afficher les villes historique         |-----------||");
+        System.out.println("\t\t\t||------------|   3: Modifier  l'historique d'une ville     |-----------||");
+        System.out.println("\t\t\t||------------|   4: supprimer une ville                    |-----------||");
+        System.out.println("\t\t\t||------------|   5: Retour                                 |-----------||");
+        System.out.println("\t\t\t||======================================================================||");
+        System.out.println();
+        System.out.println("Entrer votre choix:");
+        choix = new Scanner(System.in).nextInt();
 
             switch (choix) {
 
                 case 1:
                     System.out.println("Enter HistoricalDataID :");
-                    NuCityHist.setHistoricalDataID(new Scanner(System.in).nextInt());
+                    NuCityHist.setHistoricalDataId(new Scanner(System.in).nextInt());
 
                     System.out.println("Enter City ID :");
-                    NuCityHist.setID(new Scanner(System.in).nextInt());
+                    NuCityHist.setCityId(new Scanner(System.in).nextInt());
 
                     System.out.println("Enter Event date (YYYY-MM-DD):");
                     String EV = new Scanner(System.in).next();
@@ -161,22 +153,18 @@ public class Menu {
                     NuCityHist.setTemperature(new Scanner(System.in).nextInt());
 
                     City_History.addCityHistory(NuCityHist);
-
                     break;
-
                 case 2:
-                    System.out.println("***************************List of city history**************************");
-                    System.out.println("                                                                         ");
-                    City_History.showCityHistory().forEach(cityHistory1 -> System.out.println(cityHistory1));
-                    System.out.println("                                                                         ");
+                    System.out.println(" Tableaux des villes :");
+                    for (City_History std : City_History.showCityHistory()) {
+                        System.out.println(std);
+                    }
                     break;
 
                 case 3:
-                    System.out.println("Enter the Historical Data ID of City history that you wanna update :");
-                    NuCityHist.setHistoricalDataID(new Scanner(System.in).nextInt());
 
-                    System.out.println("Enter the new Historical Data ID :");
-                    NuCityHist.setHistoricalDataID(new Scanner(System.in).nextInt());
+                    System.out.println("Enter the Historical Data ID of City history that you wanna update :");
+                    NuCityHist.setHistoricalDataId(new Scanner(System.in).nextInt());
 
                     System.out.println("Enter the new Event Date (YYYY-MM-DD) :");
                     String newEventDate = new Scanner(System.in).next();
@@ -191,20 +179,12 @@ public class Menu {
 
                 case 4:
                     System.out.println("Enter the Historical Data ID of City History that you wanna delete :");
-                    NuCityHist.setHistoricalDataID(new Scanner(System.in).nextInt());
+                    NuCityHist.setHistoricalDataId(new Scanner(System.in).nextInt());
                     City_History.DeleteCityHistory(NuCityHist);
                     break;
 
                 case 5:
-                    City_History cityHistory1 = new City_History();
-                    System.out.print("Enter the ID of city that you want to see its history: ");
-                    int cityIdForHistoryRead = new Scanner(System.in).nextInt();
-                    cityHistory1.readCityHistory(cityIdForHistoryRead);
-                    break;
-                case 6:
                     OptionsManagemenet();
-                case 7:
-                    System.out.println(" merci pour l'utilisation de notre app !!!");
                     break;
 
                 default:
@@ -212,8 +192,7 @@ public class Menu {
 
 
             }
-        } while (choix
 
-                != 7);
+        } while (choix != 5);
     }
 }

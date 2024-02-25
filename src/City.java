@@ -52,16 +52,13 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "cityId=" + cityId +
-                ", cityName='" + cityName + '\'' +
-                ", currentTemperature=" + currentTemperature +
-                ", currentHumidity=" + currentHumidity +
-                ", currentWindSpeed=" + currentWindSpeed +
-                '}';
+        return "cityId=" + cityId + ", cityName='" + cityName  + ", currentTemperature=" + currentTemperature + ", currentHumidity=" + currentHumidity + ", currentWindSpeed=" + currentWindSpeed + '}';
     }
 
-//Connection :
+
+
+
+    //Connection :
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/Weatheer_APP",
@@ -95,7 +92,7 @@ public class City {
     public static void AjouterCity(City NuCityCara) {
         try {
             Connection connection = getConnection();
-            String query = "INSERT INTO city (cityId, cityName, currentTemperature, currentHumidity, currentWindSpeed) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO City (cityId, cityName, currentTemperature, currentHumidity, currentWindSpeed) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                 preparedStatement.setInt(1, NuCityCara.cityId);
                 preparedStatement.setString(2, NuCityCara.cityName);
@@ -111,16 +108,6 @@ public class City {
         }
     }
 
-
-//public static void SupprimerCity(int cityId)  throws SQLException{
-//        Connection connection = getConnection();
-//        String sql = "DELETE FROM City WHERE cityId = ?";
-//        (PreparedStatement statement = connection.prepareStatement(sql)) {
-//        statement.setInt(1, cityId);
-//        statement.executeUpdate();
-//        connection.close();
-//        statement.close();
-//        System.out.println("La ville a été supprimée avec succès !");
 
 
     public static void SupprimerCity(int cityId) throws SQLException {
